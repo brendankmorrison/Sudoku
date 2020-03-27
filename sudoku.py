@@ -82,16 +82,8 @@ def sudoku_solver(board):
     print(board)
 
 
-#    board = newBoard(emptyBoard)
-    print('unsolved')
-    print(board)
-    chooseMode = input("Solver(0) or Game(1):")
-    if(chooseMode == '0'):
-        sudoku_solver(board)
-    else:
-        game(board)
-
-
 if __name__ == '__main__':
-    app = App()
+    board = newBoard(emptyBoard)
+    print(board)
+    app = App(board)
     app.run()
