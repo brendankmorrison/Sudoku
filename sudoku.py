@@ -1,12 +1,26 @@
-import numpy as np
-from helper_functions import *
 from boards import *
+from board_generator import *
+import numpy as np
+import pandas as pd
+from app import *
+
+emptyBoard = np.array([
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+])
 
 
-def main():
+def game(board):
     solved = False
     moves = []
-    currBoard = chooseBoard(boards)
+    currBoard = board
     while (solved != True):
         printBoard(currBoard)
         # check if first move
@@ -62,4 +76,22 @@ def main():
     print("Board is solved!")
 
 
-main()
+def sudoku_solver(board):
+    solver(board)
+    print('solved')
+    print(board)
+
+
+#    board = newBoard(emptyBoard)
+    print('unsolved')
+    print(board)
+    chooseMode = input("Solver(0) or Game(1):")
+    if(chooseMode == '0'):
+        sudoku_solver(board)
+    else:
+        game(board)
+
+
+if __name__ == '__main__':
+    app = App()
+    app.run()

@@ -1,7 +1,12 @@
-from board_generator import *
 import numpy as np
-import pandas as pd
-emptyBoard = np.array([
+WIDTH = 450
+HEIGHT = 450
+
+# colors
+WHITE = (255, 255, 255)
+
+# boards
+testBoard = np.array([
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -12,5 +17,3 @@ emptyBoard = np.array([
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0]
 ])
-
-testBoard = newBoard(emptyBoard)

@@ -3,9 +3,11 @@ import numpy as np
 
 def checkMove(currMove, currBoard):
     isValid = True
-    # check if move has already been made
-    if(currBoard[currMove[0]][currMove[1]] != 0):
+    if((currMove[2] == 0) or (currMove[2] == 10)):
         isValid = False
+    # check if move has already been made
+    # if(currBoard[currMove[0]][currMove[1]] != 0):
+        # isValid = False
     # Check if row has no conflict
     if(currMove[2] in currBoard[currMove[0]]):
         isValid = False
@@ -97,7 +99,7 @@ def isSolved(currBoard):
 
 
 def resetMove(temp, currBoard):
-    setZero = temp
+    setZero = temp.copy()
     setZero[2] = 0
     currBoard = updateBoard(setZero, currBoard)
     return(currBoard)
@@ -114,3 +116,65 @@ def chooseBoard(boards):
         else:
             print('Not a valid board name')
         return(board)
+
+
+def solver2(currBoard):
+    stack = [[0, 0, -1]]
+    solved = False
+    board_coordinates = []
+    for i in range(0, 9):
+        for j in range(0, 9):
+            if(currBoard[i, j] != 0):
+                board_coordinates.append([i, j])
+    while (solved == False):
+        backtracking = False
+        last_move = stack.pop()
+        rnum = last_move[0]
+        cnum = last_move[1]
+        num = last_move[2] + 1
+        for i in range(rnum, 9):
+            for j in range(cnum, 9):
+                if([i, j] in board_coordinates):
+                    continue
+                while(checkMove([i, j, num], currBoard) != True):
+                    if (num > 9):
+                        backtracking = True
+                        currBoard = resetMove([i, j, num], currBoard)
+                        break
+                    else:
+                        num += 1
+                if(backtracking == False and (num != 0)):
+                    stack.append([i, j, num])
+                    if([i, j] not in board_coordinates):
+                        currBoard = updateBoard([i, j, num], currBoard)
+                    if(0 not in currBoard[i]):
+                        cnum = 0
+                    num = 0
+                elif(backtracking == True):
+                    break
+            if(backtracking == True):
+                break
+        solved = isSolved(currBoard)
+    print(currBoard)
+    print('Solved')
+
+
+def findEmpty(currBoard):
+    for i in range(0, 9):
+        for j in range(0, 9):
+            if (currBoard[i, j] == 0):
+                return([i, j])
+
+
+def solver(currBoard):
+    empty = findEmpty(currBoard)
+    if(not empty):
+        return(True)
+    else:
+        for i in range(1, 10):
+            if checkMove([empty[0], empty[1], i], currBoard):
+                currBoard[empty[0]][empty[1]] = i
+                if(solver(currBoard) == True):
+                    return True
+            currBoard[empty[0], empty[1]] = 0
+    return False
