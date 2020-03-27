@@ -1,11 +1,11 @@
-from boards import *
-from board_generator import *
+from helper_functions import *
+from settings import*
 import numpy as np
 import pandas as pd
 from app import *
 
-emptyBoard = np.array([
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+testBoard = np.array([
+    [5, 0, 5, 0, 5, 0, 5, 0, 5],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -83,7 +83,7 @@ def sudoku_solver(board):
 
 
 if __name__ == '__main__':
-    board = newBoard(emptyBoard)
+    board = newBoard(emptyBoard, 1)
     print(board)
     app = App(board)
     app.run()

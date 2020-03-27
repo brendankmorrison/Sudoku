@@ -1,13 +1,33 @@
 import numpy as np
+from settings import *
+
+
+def newBoard(board, num):
+    newBoard = board.copy()
+    nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    for i in nums:
+        x = np.random.randint(0, 9, 1)
+        y = np.random.randint(0, 9, 1)
+        if(newBoard[x, y] == 0):
+            newBoard[x, y] = i
+    solver(newBoard)
+    for i in range(0, num):
+        x = np.random.randint(0, 9, 1)
+        y = np.random.randint(0, 9, 1)
+        while(newBoard[x, y] == 0):
+            x = np.random.randint(0, 9, 1)
+            y = np.random.randint(0, 9, 1)
+        newBoard[x, y] = 0
+    return newBoard
 
 
 def checkMove(currMove, currBoard):
     isValid = True
-    if((currMove[2] == 0) or (currMove[2] == 10)):
-        isValid = False
+    # if((currMove[2] == 0) or (currMove[2] == 10)):
+    #    isValid = False
     # check if move has already been made
     # if(currBoard[currMove[0]][currMove[1]] != 0):
-        # isValid = False
+    # isValid = False
     # Check if row has no conflict
     if(currMove[2] in currBoard[currMove[0]]):
         isValid = False
@@ -116,47 +136,6 @@ def chooseBoard(boards):
         else:
             print('Not a valid board name')
         return(board)
-
-
-def solver2(currBoard):
-    stack = [[0, 0, -1]]
-    solved = False
-    board_coordinates = []
-    for i in range(0, 9):
-        for j in range(0, 9):
-            if(currBoard[i, j] != 0):
-                board_coordinates.append([i, j])
-    while (solved == False):
-        backtracking = False
-        last_move = stack.pop()
-        rnum = last_move[0]
-        cnum = last_move[1]
-        num = last_move[2] + 1
-        for i in range(rnum, 9):
-            for j in range(cnum, 9):
-                if([i, j] in board_coordinates):
-                    continue
-                while(checkMove([i, j, num], currBoard) != True):
-                    if (num > 9):
-                        backtracking = True
-                        currBoard = resetMove([i, j, num], currBoard)
-                        break
-                    else:
-                        num += 1
-                if(backtracking == False and (num != 0)):
-                    stack.append([i, j, num])
-                    if([i, j] not in board_coordinates):
-                        currBoard = updateBoard([i, j, num], currBoard)
-                    if(0 not in currBoard[i]):
-                        cnum = 0
-                    num = 0
-                elif(backtracking == True):
-                    break
-            if(backtracking == True):
-                break
-        solved = isSolved(currBoard)
-    print(currBoard)
-    print('Solved')
 
 
 def findEmpty(currBoard):
