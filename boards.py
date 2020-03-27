@@ -14,3 +14,4 @@ emptyBoard = np.array([
 ])
 
 testBoard = newBoard(emptyBoard)
+print(testBoard)

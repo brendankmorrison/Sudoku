@@ -30,5 +30,24 @@ class App:
 
     def draw(self):
         self.window.fill(WHITE)
-
+        self.drawGrid(self.window)
         pygame.display.update()
+
+    def drawGrid(self, window):
+        pygame.draw.rect(
+            window, BLACK, (grid_position[0], grid_position[1], WIDTH - 20, HEIGHT - 100), 2)
+        for x in range(9):
+            if(x % 3 != 0):
+                pygame.draw.line(window, BLACK, (grid_position[0] + x * cell_size, grid_position[1]), (
+                    grid_position[0] + x * cell_size, grid_position[1] + 450))
+            else:
+                pygame.draw.line(window, BLACK, (grid_position[0] + x * cell_size, grid_position[1]), (
+                    grid_position[0] + x * cell_size, grid_position[1] + 450), 2)
+
+        for x in range(9):
+            if(x % 3 != 0):
+                pygame.draw.line(window, BLACK, (grid_position[0], grid_position[1] + x * cell_size), (
+                    grid_position[0] + 450, grid_position[1] + x * cell_size))
+            else:
+                pygame.draw.line(window, BLACK, (grid_position[0], grid_position[1] + x * cell_size), (
+                    grid_position[0] + 450, grid_position[1] + x * cell_size), 2)
