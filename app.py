@@ -51,6 +51,9 @@ class App:
                 self.state = 'solved'
                 self.end_time = (pygame.time.get_ticks() //
                                  1000 - self.start_time)
+                endMin = self.end_time // 60
+                endSec = self.end_time % 60
+                self.end_time = str(endMin) + ":" + str(endSec)
             if self.state == 'solved':
                 self.solved_events()
                 self.solved_update()
@@ -159,9 +162,11 @@ class App:
                         self.grid = updateBoard(self.move, self.grid)
                     self.solved = isSolved(self.grid)
                     if self.solved:
-                        self.end_time = pygame.time.get_ticks() / 1000
                         self.end_time = (pygame.time.get_ticks() //
                                          1000 - self.start_time)
+                        endMin = self.end_time // 60
+                        endSec = self.end_time % 60
+                        self.end_time = str(endMin) + ":" + str(endSec)
                         self.state = 'solved'
                 # reset position back to zero if delete is pressed
                 if event.key == 8:
@@ -238,8 +243,10 @@ class App:
 
     def drawTimer(self, window):
         currTime = (pygame.time.get_ticks() // 1000 - self.start_time)
+        currMin = currTime // 60
+        currSec = currTime % 60
         font = self.timer_font.render(
-            'Time: ' + str(currTime), False, BLACK)
+            'Time: ' + str(currMin) + ":" + str(currSec), False, BLACK)
         window.blit(font, timer_position)
 
     def drawNumbers(self, window):
@@ -309,5 +316,5 @@ class App:
 
     def drawEndTime(self, window):
         font = self.timer_font.render(
-            'Time: ' + str(self.end_time), False, BLACK)
+            'Time: ' + self.end_time, False, BLACK)
         window.blit(font, timer_position)
