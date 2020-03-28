@@ -8,6 +8,7 @@ HEIGHT = 550
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 SHADOW = (192, 192, 192)
+GREEN = (127, 255, 212)
 
 # boards
 emptyBoard = np.array([
@@ -29,4 +30,11 @@ difficulty = 40
 grid_position = (10, 90)
 cell_size = 50
 grid_size = cell_size * 9
-timer_position = (10, 10)
+timer_position = (190, 60)
+sudoku_text_position = (135, 10)
+
+game_font = 'arial'
+play_button_text_size = 50
+button_text_size = 30
+sudoku_text_size = 70
+number_text_size = cell_size
