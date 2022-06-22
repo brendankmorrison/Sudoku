@@ -1,7 +1,7 @@
 altgraph==0.17
 cx-Freeze==6.1
 macholib==1.14
-numpy==1.18.2
+numpy==1.22.0
 pandas==1.0.3
 pygame==1.9.6
 PyInstaller==3.6
